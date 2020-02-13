@@ -36,6 +36,7 @@ public class CalculatorGUI {
 
 
     public CalculatorGUI() {
+        //lol
         a1Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -112,7 +113,7 @@ public class CalculatorGUI {
             public void actionPerformed(ActionEvent e) {
             String buttonText = dodajButton.getText();
 
-            buttonText
+//            buttonText
 
             }
         });
