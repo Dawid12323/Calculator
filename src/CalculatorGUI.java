@@ -80,7 +80,7 @@ public class CalculatorGUI implements ActionListener {
         OFFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                a1Button.removeActionListener(this);
+                a1Button.removeActionListener(this);//ss
                 a2Button.removeActionListener(this);
                 a3Button.removeActionListener(this);
                 a4Button.removeActionListener(this);
