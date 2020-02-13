@@ -1,20 +1,23 @@
 import models.MathOperation;
 
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculatorGUI {
+public class CalculatorGUI implements ActionListener {
 
-    private double total1 = 0;
-    private double total2 = 0;
+    private double total1 = 0.0;
+    private double total2 = 0.0;
 
     private JPanel panel1;
     private JButton a1Button;
     private JButton a2Button;
-    private JTextField textField1;
+    private JTextField resultField;
     private JButton a3Button;
     private JButton a4Button;
     private JButton a5Button;
@@ -32,152 +35,139 @@ public class CalculatorGUI {
     private JButton podzielButton;
     private JButton wynikButton;
 
+    private boolean isFunctionChar = false;
+
     private List<MathOperation> operationList = new ArrayList<>();
 
 
     public CalculatorGUI() {
-        //lol
-        a1Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a1button = textField1.getText() + a1Button.getText();
-                textField1.setText(a1button);
-            }
-        });
-        a2Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a2button = textField1.getText() + a2Button.getText();
-                textField1.setText(a2button);
-            }
-        });
-        a3Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a3button = textField1.getText() + a3Button.getText();
-                textField1.setText(a3button);
-            }
-        });
-        a4Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a4button = textField1.getText() + a4Button.getText();
-                textField1.setText(a4button);
-            }
-        });
-        a5Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a5button = textField1.getText() + a5Button.getText();
-                textField1.setText(a5button);
-            }
-        });
-        a6Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a6button = textField1.getText() + a6Button.getText();
-                textField1.setText(a6button);
-            }
-        });
-        a7Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a7button = textField1.getText() + a7Button.getText();
-                textField1.setText(a7button);
-            }
-        });
-        a8Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a8button = textField1.getText() + a8Button.getText();
-                textField1.setText(a8button);
-            }
-        });
-        a9Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a9button = textField1.getText() + a9Button.getText();
-                textField1.setText(a9button);
-            }
-        });
-        a0Button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String a0button = textField1.getText() + a0Button.getText();
-                textField1.setText(a0button);
-            }
-        });
 
-        dodajButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            String buttonText = dodajButton.getText();
 
-//            buttonTextv hh gg ffss
+        initButtons();
 
-            }
-        });
-        odejmijButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String button_text = odejmijButton.getText();
-                getOperetor(button_text);
-            }
-        });
-        wynikButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-                switch (operationList.get(0)) {
-                    case PLUS:
-                        total2 = total1 + Double.parseDouble(textField1.getText());
-                        break;
-                    case MINUS:
-                        total2 = total1 - Double.parseDouble(textField1.getText());
-                        break;
-//                    case '*':
-//                        total2 = total1 * Double.parseDouble(textField1.getText());
+//        wynikButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//
+//
+//                String buttonText = wynikButton.getText();
+//
+//                switch (operationList.get(0)) {
+//                    case PLUS:
+//                        total2 = total1 + Double.parseDouble(resultField.getText());
 //                        break;
-//                    case '/':
-//                        total2 = total1 / Double.parseDouble(textField1.getText());
+//                    case MINUS:
+//                        total2 = total1 - Double.parseDouble(resultField.getText());
 //                        break;
-                }
-                textField1.setText(Double.toString(total2) );
-                total1 = 0;
-            }
-        });
-        CLEARButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                total2 = 0;
-                textField1.setText("");
-            }
+//                    case MULTIPLIED:
+//                        total2 = total1 * Double.parseDouble(resultField.getText());
+//                        break;
+//                    case SHARE:
+//                        total2 = total1 / Double.parseDouble(resultField.getText());
+//                        break;
+//                }
+//                resultField.setText(Double.toString(total2));
+//                total1 = 0;
+//
+//
+//            }
+//        });
+        CLEARButton.addActionListener(e -> {
+            total2 = 0;
+            resultField.setText("");
         });
 
-        pomnozButton.addActionListener(new ActionListener() {
+        OFFButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-            String button_text = pomnozButton.getText();
-            getOperetor(button_text);
-            }
-        });
-        podzielButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            String button_text = podzielButton.getText();
-            getOperetor(button_text);
+                a1Button.removeActionListener(this);
+                a2Button.removeActionListener(this);
+                a3Button.removeActionListener(this);
+                a4Button.removeActionListener(this);
+                a5Button.removeActionListener(this);
+                a6Button.removeActionListener(this);
+                a7Button.removeActionListener(this);
+                a8Button.removeActionListener(this);
+                a9Button.removeActionListener(this);
+                a0Button.removeActionListener(this);
+                dodajButton.removeActionListener(this);
+                odejmijButton.removeActionListener(this);
+                pomnozButton.removeActionListener(this);
+                podzielButton.removeActionListener(this);
+                wynikButton.removeActionListener(this);
             }
         });
     }
+    private void initButtons() {
+        a1Button.addActionListener(this);
+        a2Button.addActionListener(this);
+        a3Button.addActionListener(this);
+        a4Button.addActionListener(this);
+        a5Button.addActionListener(this);
+        a6Button.addActionListener(this);
+        a7Button.addActionListener(this);
+        a8Button.addActionListener(this);
+        a9Button.addActionListener(this);
+        a0Button.addActionListener(this);
+        dodajButton.addActionListener(this);
+        odejmijButton.addActionListener(this);
+        pomnozButton.addActionListener(this);
+        podzielButton.addActionListener(this);
+        wynikButton.addActionListener(this);
 
-    private void getOperetor(String button_text) {
     }
+
 
     public JPanel getPanel() {
         return panel1;
     }
 
-    private void createUIComponents() {
-        // TODO: place custom component creation code here
+    private void onNumericButtonClick(JButton button) {
+        String buttonText = button.getText();
+        resultField.setText(resultField.getText() + buttonText);
+        isFunctionChar = false;
     }
+
+
+
+
+    @Override
+    public void actionPerformed(ActionEvent event) {
+        if (event.getSource() == odejmijButton || event.getSource() == dodajButton || event.getSource() == pomnozButton || event.getSource() == podzielButton) {
+            onFunctionButtonClick((JButton) event.getSource());
+        } else if (event.getSource() == wynikButton) {
+            createResult();
+        } else {
+            onNumericButtonClick((JButton) event.getSource());
+        }
+    }
+
+
+    private void createResult() {
+        String tmp = resultField.getText();
+        if (isFunctionChar) {
+            tmp = tmp.substring(0, tmp.length() - 1);
+        }
+
+        ScriptEngineManager mgr = new ScriptEngineManager();
+        ScriptEngine engine = mgr.getEngineByName("JavaScript");
+
+        try {
+            resultField.setText(engine.eval(tmp).toString());
+        } catch (ScriptException e) {
+            e.printStackTrace();
+        }
+    }
+    private void onFunctionButtonClick(JButton source) {
+        if (!isFunctionChar) {
+            isFunctionChar = true;
+            resultField.setText(resultField.getText() + source.getText());
+        } else {
+            String result = resultField.getText();
+            result = result.substring(0, result.length() - 1);
+            resultField.setText(result + source.getText());
+        }
+
+    }
+
 }

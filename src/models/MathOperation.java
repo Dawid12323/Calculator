@@ -4,6 +4,8 @@ public enum MathOperation {
 
     PLUS,
     MINUS,
+    MULTIPLIED,
+    SHARE,
 
 
 }
