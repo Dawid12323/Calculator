@@ -113,7 +113,7 @@ public class CalculatorGUI {
             public void actionPerformed(ActionEvent e) {
             String buttonText = dodajButton.getText();
 
-//            buttonTextv hh gg
+//            buttonTextv hh gg ff
 
             }
         });
