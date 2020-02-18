@@ -34,7 +34,7 @@ public class CalculatorGUI extends JFrame implements ActionListener {
     private boolean isFunctionChar = false;
 
 
-    private List<JButton> list = new ArrayList<>(); //co tu jest
+    private List<JButton> list = new ArrayList<>();
 
     public CalculatorGUI() {
         initFrame();
@@ -82,12 +82,6 @@ public class CalculatorGUI extends JFrame implements ActionListener {
         }
 
     }
-//    private void addListeners() {
-//        for (JButton button : list) {
-//            button.addActionListener(this);
-//        }
-//
-//    }
 
 
     public JPanel getPanel() {

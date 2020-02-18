@@ -1,4 +1,3 @@
-import javax.swing.*;
 
 public class Main {
 
@@ -8,11 +7,6 @@ public class Main {
         System.out.println("hello");
 
         CalculatorGUI gui = new CalculatorGUI();
-//        gui.lol();
-//        JFrame frame = new JFrame();
-//        frame.setContentPane(gui.getPanel());
-//        frame.setVisible(true);
-//        frame.setSize(250, 250);
         System.out.println(CalculatorGUI);
 
     }

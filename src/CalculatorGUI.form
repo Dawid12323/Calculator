@@ -161,7 +161,9 @@
           </grid>
           <gridbag weightx="0.0" weighty="0.0"/>
         </constraints>
-        <properties/>
+        <properties>
+          <text value=""/>
+        </properties>
       </component>
       <component id="d1468" class="javax.swing.JButton" binding="pomnozButton">
         <constraints>
